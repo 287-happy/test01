@@ -1,0 +1,221 @@
+/* 重置默认样式 */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* 身体布局 */
+body {
+    overflow: hidden;
+    background-color: #ffffff; /* 页面背景色 */
+    display: flex;
+    flex-direction: column; /* 垂直布局 */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+	background-image: url(''); /* 设置背景图片 */
+	background-size: cover; /* 背景图片覆盖整个页面 */
+	background-position: center; /* 背景图片居中显示 */
+	background-attachment: fixed; /* 背景图片固定，不随页面滚动 */
+	
+}
+
+/* 标题样式 */
+.title {
+    width: 100%; /* 标题宽度占满整个页面 */
+    max-width: 100vw; /* 标题最大宽度不超过视口宽度 */
+    padding: 20px 0; /* 标题内边距 */
+    text-align: center; /* 文字居中 */
+    font-size: 45px; /* 字体大小 */
+    font-family: Arial, sans-serif; /* 字体 */
+    color: #333; /* 字体颜色 */
+    margin-bottom: 20px; /* 与导航栏的间距 */
+    opacity: 0; /* 初始透明度为0 */
+    transform: translateY(-100%); /* 初始位置在视口上方 */
+    animation: slideDown 1s ease forwards; /* 应用动画 */
+}
+
+/* 标题动画 */
+@keyframes slideDown {
+    to {
+        opacity: 1; /* 结束时透明度为1 */
+        transform: translateY(0); /* 结束时位置在原位 */
+    }
+}
+
+/* 导航栏样式 */
+.nav-container {
+    width: 100%; /* 导航容器宽度占满整个页面 */
+    max-width: 100vw; /* 导航容器最大宽度不超过视口宽度 */
+    opacity: 0; /* 初始透明度为0 */
+    animation: fadeIn 1s ease forwards 1s; /* 应用动画 */
+}
+
+/* 导航栏动画 */
+@keyframes fadeIn {
+    to {
+        opacity: 1; /* 结束时透明度为1 */
+    }
+}
+
+/* 导航栏项样式 */
+.nav {
+    width: 100%; /* 导航栏宽度占满整个页面 */
+    max-width: 100vw; /* 导航栏最大宽度不超过视口宽度 */
+    padding: 10px 0; /* 导航栏内边距 */
+    text-align: center; /* 文字居中 */
+    font-size: 18px; /* 字体大小 */
+    font-family: Arial, sans-serif; /* 字体 */
+    color: #333; /* 字体颜色 */
+    background-color: #f8f8f8; /* 导航栏背景色 */
+    transition: background-color 0.3s, color 0.3s; /* 过渡效果 */
+}
+
+
+
+
+/* 导航栏链接样式 */
+.nav a {
+    margin: 0 15px;
+    text-decoration: none; /* 移除默认下划线 */
+    color: #333;
+    position: relative; /* 用于定位伪元素 */
+    transition: color 0.3s ease; /* 平滑过渡颜色 */
+}
+
+/* 导航栏链接底部渐变下划线动画 */
+.nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 100%; /* 初始化时，右边缘在外部 */
+    bottom: 0;
+    height: 2px; /* 下划线高度 */
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变颜色 */
+    transition: right 0.3s ease; /* 平滑过渡 */
+}
+
+/* 导航栏链接鼠标移入效果 */
+.nav a:hover::after {
+    right: 0; /* 鼠标移入时，右边缘移动到0 */
+}
+
+/* 导航栏链接鼠标移入时文字变色 */
+.nav a:hover {
+    color: #ffffff; /* 文字颜色改变 */
+}
+
+/* 容器样式 */
+.shell {
+    width: 100%; /* 容器宽度占满整个页面 */
+    max-width: 100vw; /* 容器最大宽度不超过视口宽度 */
+    height: 80vh; /* 容器高度 */
+    display: flex;
+    overflow: hidden; /* 隐藏溢出的内容 */
+    border-radius: 10px; /* 容器圆角 */
+    position: relative; /* 相对定位 */
+    margin-top: 50px;
+    margin-bottom: 100px;
+    opacity: 0; /* 初始透明度为0 */
+    animation: slideDown 1s ease forwards 2s, borderGlow 1.5s infinite alternate; /* 应用两个动画 */
+    transform: translateY(-100%); /* 初始位置在视口上方 */
+}
+
+/* 边框动画 */
+@keyframes borderGlow {
+    from {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* 开始时较亮的光 */
+    }
+    to {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* 结束时较暗的光 */
+    }
+}
+
+/* 盒子样式 */
+.box {
+    flex: 1; /* 初始flex比例 */
+    transition: flex 0.8s, transform 0.8s, box-shadow 0.8s; /* 过渡效果 */
+    background-size: cover; /* 修改为cover，确保图片按比例填充盒子 */
+    background-position: center;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+/* 盒子悬停样式 */
+.box:hover {
+    flex-grow: 3; /* 悬停时flex比例 */
+    z-index: 2; /* 确保悬停的图片在顶部 */
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5); /* 悬停时阴影效果 */
+}
+
+/* 非悬停盒子样式 */
+.box:not(:hover) {
+    transform: scale(0.8); /* 非悬停时缩小 */
+    transition: transform 0.8s; /* 过渡效果 */
+}
+
+/* 盒子文本悬停动画 */
+.box:hover .text {
+    animation: appear 0.8s forwards 0.3s;
+}
+
+/* 文本样式 */
+.text {
+    padding: 10px 20px; /* 调整内边距 */
+    margin-bottom: 15px; /* 文本框离底部15px */
+    opacity: 0;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.8s;
+    width: 60%; /* 调整文本框宽度为适中大小 */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); /* 文字框阴影 */
+}
+
+/* 底部版权信息样式 */
+footer {
+    width: 100%; /* 底部容器宽度占满整个页面 */
+    max-width: 100vw; /* 底部容器最大宽度不超过视口宽度 */
+    text-align: center; /* 文字居中 */
+    font-size: 18px; /* 字体大小 */
+    font-family: Arial, sans-serif; /* 字体 */
+    color: #333; /* 字体颜色 */
+    padding: 20px 0; /* 底部容器内边距 */
+    position: absolute; /* 绝对定位 */
+    bottom: 0px;
+    left: 0; /* 左边对齐 */
+}
+
+/* 文本出现动画 */
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 文本缓动函数 */
+.text {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1); /* 缓动函数 */
+}
+
+/* 四个图片类的样式 */
+.img1 {
+    background-image: url('../img111/李子柒.jpg');
+}
+
+.img2 {
+    background-image: url('../img111/朱铁雄.jpg');
+}
+
+.img3 {
+    background-image: url('../img111/江九月.jpg');
+}
+
+.img4 {
+    background-image: url('../img111/樊锦诗.jpg');
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Dynamic Boxes</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            overflow: hidden;
+            background-color: #ffffff; /* 页面背景色 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .shell {
+            width: 100%; /* 容器宽度占满整个页面 */
+            height: 80vh; /* 容器高度 */
+            display: flex;
+            overflow: hidden; /* 隐藏溢出的内容 */
+            border-radius: 10px; /* 容器圆角 */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); /* 容器阴影 */
+        }
+        .box {
+            flex: 1; /* 初始flex比例 */
+            transition: flex 0.8s, transform 0.8s, box-shadow 0.8s; /* 过渡效果 */
+            background-size: cover;
+            background-position: center;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+        .box:hover {
+            flex-grow: 3; /* 悬停时flex比例 */
+            z-index: 1; /* 确保悬停的图片在顶部 */
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5); /* 悬停时阴影效果 */
+        }
+        .box:not(:hover) {
+            transform: scale(0.8); /* 非悬停时缩小 */
+            transition: transform 0.8s; /* 过渡效果 */
+        }
+        .box:hover .text {
+            animation: appear 0.8s forwards 0.3s;
+        }
+        .img1 { background-image: url('https://via.placeholder.com/600x400?text=Image+1'); }
+        .img2 { background-image: url('https://via.placeholder.com/600x400?text=Image+2'); }
+        .img3 { background-image: url('https://via.placeholder.com/600x400?text=Image+3'); }
+        .img4 { background-image: url('https://via.placeholder.com/600x400?text=Image+4'); }
+        .text {
+            padding: 20px; /* 简化内边距 */
+            opacity: 0;
+            color: rgb(255, 255, 255);
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: opacity 0.8s;
+            width: 100%; /* 文字框宽度 */
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); /* 文字框阴影 */
+        }
+        header {
+            height: 50px; /* 简化头部高度 */
+            font-size: 24px; /* 简化字体大小 */
+            font-family: Arial, sans-serif; /* 简化字体 */
+            line-height: 50px;
+            font-weight: bold;
+            border-bottom: 2px solid white;
+        }
+        
+        .title {
+            display: inline-block;
+            height: 50px;
+            text-decoration: underline;
+            text-underline-offset: 5px;
+            text-decoration-thickness: 2px;
+        }
+        
+        .num {
+            margin-left: -15px;
+        }
+        
+        .text p {
+            margin: 15px 0;
+            font-size: 18px; /* 简化字体大小 */
+        }
+        
+        @keyframes appear {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <div class="box img1">
+            <div class="text">
+                <header>
+                    <span class="title">NO.</span>
+                    <span class="num">1</span>
+                </header>
+                <p>
+                    666
+                </p>
+            </div>
+        </div>
+        <div class="box img2">
+            <div class="text">
+                <header>
+                    <span class="title">NO.</span>
+                    <span class="num">2</span>
+                </header>
+                <p>
+                    666
+                </p>
+            </div>
+        </div>  
+        <div class="box img3">
+            <div class="text">
+                <header>
+                    <span class="title">NO.</span>
+                    <span class="num">3</span>
+                </header>
+                <p>
+                    666
+                </p>  
+            </div>
+        </div>
+        <div class="box img4">
+            <div class="text">
+                <header>
+                    <span class="title">NO.</span>
+                    <span class="num">4</span>
+                </header>
+                <p>
+                    666
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

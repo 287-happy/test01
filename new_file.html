@@ -1,0 +1,95 @@
+要实现图片依次从左往右滚动的效果，我们可以使用CSS动画和HTML结构来创建一个无缝滚动的图片列表。以下是一个简单的实现方法：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Scroll</title>
+<style>
+  .image-scroll-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .image-scroll-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  .image-scroll-wrapper img {
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+  }
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="image-scroll-container">
+  <div class="image-scroll-wrapper">
+    <img src="image1.jpg" alt="Image 1">
+    <img src="image2.jpg" alt="Image 2">
+    <img src="image3.jpg" alt="Image 3">
+    <!-- Add as many images as you like here -->
+  </div>
+</div>
+
+<script>
+  const container = document.querySelector('.image-scroll-container');
+  const wrapper = document.querySelector('.image-scroll-wrapper');
+  const images = wrapper.querySelectorAll('img');
+  const totalWidth = images[images.length - 1].offsetLeft + images[images.length - 1].offsetWidth;
+  let position = 0;
+  let animationFrame = null;
+
+  function scrollImages() {
+    return new Promise(resolve => {
+      if (position >= totalWidth) {
+        position = 0;
+        wrapper.style.transition = 'none';
+        wrapper.style.transform = `translateX(0)`;
+        wrapper.offsetHeight; // Trigger reflow
+        wrapper.style.transition = 'transform 0.5s ease-in-out';
+      }
+      position += window.innerWidth; // Move by the width of the viewport
+      wrapper.style.transform = `translateX(-${position}px)`;
+      resolve();
+    });
+  }
+
+  function animateScroll() {
+    scrollImages().then(() => {
+      animationFrame = requestAnimationFrame(animateScroll);
+    });
+  }
+
+  animateScroll();
+
+  // Reset animation when mouse enters the container
+  container.addEventListener('mouseenter', () => {
+    cancelAnimationFrame(animationFrame);
+    wrapper.style.transition = 'none';
+    wrapper.style.transform = `translateX(0)`;
+  });
+
+  // Resume animation when mouse leaves the container
+  container.addEventListener('mouseleave', () => {
+    animationFrame = requestAnimationFrame(animateScroll);
+  });
+</script>
+
+</body>
+</html>
+```
+
